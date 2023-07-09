@@ -1,0 +1,38 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+std::vector<std::vector<char>> mergeStringsToMatrix(const std::vector<std::string>& strings) {
+    std::vector<std::vector<char>> matrix;
+    int max_length = 0;
+
+    // Находим максимальную длину строки
+    for (const std::string& str : strings) {
+        max_length = std::max(max_length, static_cast<int>(str.length()));
+    }
+
+    // Объединяем строки в матрицу
+    for (const std::string& str : strings) {
+        std::vector<char> row(max_length, ' ');
+        std::copy(str.begin(), str.end(), row.begin());
+        matrix.push_back(row);
+    }
+
+    return matrix;
+}
+
+// Пример использования
+int main() {
+    std::vector<std::string> strings = { "Hello", "World", "C++" };
+    std::vector<std::vector<char>> result = mergeStringsToMatrix(strings);
+
+    // Выводим матрицу
+    for (const std::vector<char>& row : result) {
+        for (char ch : row) {
+            std::cout << ch << ' ';
+        }
+        std::cout << std::endl;
+    }
+
+    return 0;
+}
